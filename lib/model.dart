@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'area.dart';
@@ -44,6 +45,14 @@ Future<List<City>?> loadCities(List<Province>? provinces, String provinceId) asy
 
 /// 获取区列表
 Future<List<Area>?> loadAreas(Province? province, String cityId) async {
+  if (kDebugMode) {
+    print('pro ${province?.children?.length}');
+  }
+
   if (province?.children?.isEmpty ?? true) return null;
-  return province?.children?.lastWhere((e) => e.id == cityId).children;
+  var index = province!.children!.indexWhere((city) => city.id == cityId);
+  if (index == -1) {
+    return null;
+  }
+  return province.children![index].children;
 }

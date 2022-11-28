@@ -203,6 +203,10 @@ class _AddressPickerState extends State<AddressPicker> {
     areas = await loadAreas(_province, _city!.id);
     isLoading = false;
     setState(() {});
+
+    if (kDebugMode) {
+      print('areas ${areas?.length}');
+    }
   }
 
   /// 区域选择
