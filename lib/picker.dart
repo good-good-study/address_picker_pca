@@ -168,7 +168,7 @@ class _AddressPickerState extends State<AddressPicker> {
     _area = null;
     showCity = true;
     showArea = false;
-    setState(() {});
+    isLoading = true;
 
     // 获取对应的城市
     await Future.delayed(_kSmallDuration);
@@ -195,7 +195,6 @@ class _AddressPickerState extends State<AddressPicker> {
     showCity = true;
     showArea = true;
     isLoading = true;
-    setState(() {});
 
     // 获取对应的区
     await Future.delayed(_kSmallDuration);
@@ -219,7 +218,6 @@ class _AddressPickerState extends State<AddressPicker> {
 
     await Future.delayed(_kDuration);
     if (!mounted) return;
-    tabIndex = 2;
     isLoading = false;
     setState(() {});
     _animatedToEnd();
