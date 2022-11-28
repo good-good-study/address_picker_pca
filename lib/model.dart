@@ -45,10 +45,6 @@ Future<List<City>?> loadCities(List<Province>? provinces, String provinceId) asy
 
 /// 获取区列表
 Future<List<Area>?> loadAreas(Province? province, String cityId) async {
-  if (kDebugMode) {
-    print('pro ${province?.children?.length}');
-  }
-
   if (province?.children?.isEmpty ?? true) return null;
   var index = province!.children!.indexWhere((city) => city.id == cityId);
   if (index == -1) {

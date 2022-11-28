@@ -80,6 +80,9 @@ class _AddressPickerState extends State<AddressPicker> {
 
   @override
   void initState() {
+    _province = widget.province;
+    _city = widget.city;
+    _area = widget.area;
     super.initState();
     _init();
   }
@@ -93,9 +96,6 @@ class _AddressPickerState extends State<AddressPicker> {
   /// 初始化时获取省份
   Future<void> _init() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    _province = widget.province;
-    _city = widget.city;
-    _area = widget.area;
 
     // 省
     provinces = provinces ?? await loadProvinces();
