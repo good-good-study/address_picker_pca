@@ -191,7 +191,6 @@ class _AddressPickerState extends State<AddressPicker> {
       return;
     }
     tabIndex = 2;
-    areas?.clear();
     _area = null;
     showCity = true;
     showArea = true;
