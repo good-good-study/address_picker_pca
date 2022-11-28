@@ -38,10 +38,12 @@ Future<List<Province>?> loadProvinces() async {
 
 /// 获取城市列表
 Future<List<City>?> loadCities(List<Province>? provinces, String provinceId) async {
+  if (provinces?.isEmpty ?? true) return null;
   return provinces?.lastWhere((e) => e.id == provinceId).children;
 }
 
 /// 获取区列表
 Future<List<Area>?> loadAreas(Province? province, String cityId) async {
+  if (province?.children?.isEmpty ?? true) return null;
   return province?.children?.lastWhere((e) => e.id == cityId).children;
 }

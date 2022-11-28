@@ -74,6 +74,7 @@ class _AddressPickerState extends State<AddressPicker> {
   /// 将地址信息返回
   void _onConfirm() async {
     Navigator.pop(context);
+    if (_province == null || _city == null) return;
     widget.onConfirm?.call(_province, _city, _area);
   }
 
