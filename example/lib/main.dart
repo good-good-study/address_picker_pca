@@ -45,9 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.transparent,
       builder: (context) {
         return AddressPicker(
-          province: province,
-          city: city,
-          area: area,
+          provinceId: province?.id,
+          cityId: city?.id,
+          areaId: area?.id,
           onConfirm: (province, city, area) async {
             this.province = province;
             this.city = city;

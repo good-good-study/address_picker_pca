@@ -12,9 +12,9 @@ const _kDuration = Duration(milliseconds: 200);
 
 /// 省、市、区 选择器
 class AddressPicker extends StatefulWidget {
-  final Province? province;
-  final City? city;
-  final Area? area;
+  final String? provinceId;
+  final String? cityId;
+  final String? areaId;
   final WidgetBuilder? loadingBuilder;
   final String title;
   final TextStyle? textStyle;
@@ -25,9 +25,9 @@ class AddressPicker extends StatefulWidget {
   const AddressPicker({
     Key? key,
     this.onConfirm,
-    this.province,
-    this.city,
-    this.area,
+    this.provinceId,
+    this.cityId,
+    this.areaId,
     this.loadingBuilder,
     this.borderRadius,
     this.title = '选择地区',
@@ -67,9 +67,9 @@ class _AddressPickerState extends State<AddressPicker> {
 
   /// 是否显示预设地址
   bool get isFindIndex =>
-      _province != null ||
-      (_province != null && _city != null) ||
-      (_province != null && _city != null && _area != null);
+      widget.provinceId != null ||
+      (widget.provinceId != null && widget.cityId != null) ||
+      (widget.provinceId != null && widget.cityId != null && widget.areaId != null);
 
   /// 将地址信息返回
   void _onConfirm() async {
@@ -80,9 +80,6 @@ class _AddressPickerState extends State<AddressPicker> {
 
   @override
   void initState() {
-    _province = widget.province;
-    _city = widget.city;
-    _area = widget.area;
     super.initState();
     _init();
   }
@@ -96,34 +93,46 @@ class _AddressPickerState extends State<AddressPicker> {
   /// 初始化时获取省份
   Future<void> _init() async {
     await Future.delayed(const Duration(milliseconds: 500));
+    // _province = widget.province;
+    // _city = widget.city;
+    // _area = widget.area;
 
     // 省
     provinces = provinces ?? await loadProvinces();
     showProvince = provinces?.isNotEmpty ?? false;
 
+    int pIndex = -1, cIndex = -1, aIndex = -1;
+
     if (isFindIndex) {
-      var pIndex = provinces?.indexWhere((e) => e.id == _province?.id) ?? -1;
+      pIndex = provinces?.indexWhere((e) => e.id == widget.provinceId) ?? -1;
       if (pIndex != -1) {
         initialIndexP = pIndex;
+        _province = provinces![pIndex];
       }
 
       // 市
-      var cities = await loadCities(provinces, _province!.id);
-      var cIndex = cities?.indexWhere((e) => e.id == _city?.id) ?? -1;
-      if (cIndex != -1) {
-        this.cities = cities;
-        initialIndexC = cIndex;
-      }
+      if (_province != null) {
+        var cities = await loadCities(provinces, _province!.id);
+        cIndex = cities?.indexWhere((e) => e.id == widget.cityId) ?? -1;
+        if (cIndex != -1) {
+          this.cities = cities;
+          initialIndexC = cIndex;
+          _city = cities![cIndex];
+        }
 
-      // 区
-      var areas = await loadAreas(_province, _city?.id ?? '');
-      var aIndex = areas?.indexWhere((e) => e.id == _area?.id) ?? -1;
-      if (aIndex != -1) {
-        this.areas = areas;
-        initialIndexA = aIndex;
-        _onAreaChanged(aIndex);
-      } else if (cIndex != -1) {
-        _onCityChanged(cIndex);
+        // 区
+        if (_city != null) {
+          var areas = await loadAreas(_province, _city?.id ?? '');
+          aIndex = areas?.indexWhere((e) => e.id == widget.areaId) ?? -1;
+          if (aIndex != -1) {
+            this.areas = areas;
+            initialIndexA = aIndex;
+            _area = areas![aIndex];
+            _onAreaChanged(aIndex);
+          } else if (cIndex != -1) {
+            _onCityChanged(cIndex);
+          }
+        }
       }
 
       if (!mounted) return;
