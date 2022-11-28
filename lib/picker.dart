@@ -158,28 +158,24 @@ class _AddressPickerState extends State<AddressPicker> {
 
   /// 省份选择
   void _onProvinceChanged(int index) async {
-    if (_province == provinces![index]) return;
     _province = provinces![index];
     if (kDebugMode) {
       print('_onProvinceChanged ${_province?.name}');
     }
-    if (tabIndex != 1) {
-      tabIndex = 1;
-      cities?.clear();
-      areas?.clear();
-      _city = null;
-      _area = null;
-      showCity = true;
-      showArea = false;
-      setState(() {});
+    tabIndex = 1;
+    areas?.clear();
+    _city = null;
+    _area = null;
+    showCity = true;
+    showArea = false;
+    setState(() {});
 
-      // 获取对应的城市
-      await Future.delayed(_kSmallDuration);
-      if (!mounted) return;
-      cities = await loadCities(provinces, _province!.id);
-      isLoading = false;
-      setState(() {});
-    }
+    // 获取对应的城市
+    await Future.delayed(_kSmallDuration);
+    if (!mounted) return;
+    cities = await loadCities(provinces, _province!.id);
+    isLoading = false;
+    setState(() {});
   }
 
   /// 城市选择
@@ -194,22 +190,20 @@ class _AddressPickerState extends State<AddressPicker> {
       setState(() {});
       return;
     }
-    if (tabIndex != 2) {
-      tabIndex = 2;
-      areas?.clear();
-      _area = null;
-      showCity = true;
-      showArea = true;
-      isLoading = true;
-      setState(() {});
+    tabIndex = 2;
+    areas?.clear();
+    _area = null;
+    showCity = true;
+    showArea = true;
+    isLoading = true;
+    setState(() {});
 
-      // 获取对应的区
-      await Future.delayed(_kSmallDuration);
-      if (!mounted) return;
-      areas = await loadAreas(_province, _city!.id);
-      isLoading = false;
-      setState(() {});
-    }
+    // 获取对应的区
+    await Future.delayed(_kSmallDuration);
+    if (!mounted) return;
+    areas = await loadAreas(_province, _city!.id);
+    isLoading = false;
+    setState(() {});
   }
 
   /// 区域选择
