@@ -323,6 +323,7 @@ class _AddressPickerState extends State<AddressPicker> {
                     children: [
                       /// 省
                       ScrollablePositionedList.builder(
+                        physics: const ClampingScrollPhysics(),
                         itemScrollController: provinceController,
                         itemPositionsListener: ItemPositionsListener.create(),
                         initialScrollIndex: initialIndexP,
@@ -338,6 +339,7 @@ class _AddressPickerState extends State<AddressPicker> {
 
                       /// 市
                       ScrollablePositionedList.builder(
+                        physics: const ClampingScrollPhysics(),
                         itemScrollController: cityController,
                         itemPositionsListener: ItemPositionsListener.create(),
                         initialScrollIndex: initialIndexC,
@@ -353,6 +355,7 @@ class _AddressPickerState extends State<AddressPicker> {
 
                       /// 区
                       ScrollablePositionedList.builder(
+                        physics: const ClampingScrollPhysics(),
                         itemScrollController: areaController,
                         itemPositionsListener: ItemPositionsListener.create(),
                         initialScrollIndex: initialIndexA,
