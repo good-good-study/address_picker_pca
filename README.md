@@ -1,39 +1,51 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Flutter 版本的省市区三级联动，此版本不包含街道数据。
 
 ## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+名词解释 ：pca -> Province、City、Area 省市区
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```dart
+dependencies:
+  address_picker_pca:
+    git:
+      url: "https://github.com/good-good-study/address_picker_pca.git"
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:address_picker_pca/address_picker_pca.dart';
+
+Province? province;
+City? city;
+Area? area;
+
+String? _address = '未选择地址';
+
+/// 选择地址
+void _onAddress() async {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      return AddressPicker(
+        provinceId: province?.id,
+        cityId: city?.id,
+        areaId: area?.id,
+        onConfirm: (province, city, area) async {
+          this.province = province;
+          this.city = city;
+          this.area = area;
+          if (province != null && city != null) {
+            var address = province.name + city.name + (area?.name ?? '');
+            setState(() {
+              _address = address;
+            });
+          }
+        },
+      );
+    },
+  );
+}
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
