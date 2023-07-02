@@ -453,15 +453,13 @@ class Title extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Material(
-              child: Text(
-                '取消',
-                style: textStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .subtitle2
-                        ?.copyWith(fontWeight: FontWeight.w500),
-              ),
+            child: Text(
+              '取消',
+              style: textStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .subtitle2
+                      ?.copyWith(fontWeight: FontWeight.w500),
             ),
           ),
           Text(
@@ -474,15 +472,13 @@ class Title extends StatelessWidget {
           ),
           TextButton(
             onPressed: onConfirm,
-            child: Material(
-              child: Text(
-                '确定',
-                style: textStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .subtitle2
-                        ?.copyWith(fontWeight: FontWeight.w500),
-              ),
+            child: Text(
+              '确定',
+              style: textStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .subtitle2
+                      ?.copyWith(fontWeight: FontWeight.w500),
             ),
           ),
         ],
