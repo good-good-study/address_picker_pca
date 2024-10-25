@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '地址选择器',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        backgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
+            .copyWith(background: Colors.white),
       ),
       home: const MyHomePage(title: '地址选择器'),
     );
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(32),
           child: Text(
             '$_address',
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
       ),

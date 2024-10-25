@@ -251,7 +251,7 @@ class _AddressPickerState extends State<AddressPicker> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: widget.borderRadius ??
           const BorderRadius.only(
             topLeft: Radius.circular(16),
@@ -427,7 +427,7 @@ class TitleButton extends StatelessWidget {
                 TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Theme.of(context).textTheme.bodyText1?.color,
+                  color: Theme.of(context).textTheme.titleMedium?.color,
                 ),
       ),
     );
@@ -458,7 +458,7 @@ class Title extends StatelessWidget {
               style: textStyle ??
                   Theme.of(context)
                       .textTheme
-                      .subtitle2
+                      .titleMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
             ),
           ),
@@ -467,7 +467,7 @@ class Title extends StatelessWidget {
             style: textStyle ??
                 Theme.of(context)
                     .textTheme
-                    .subtitle2
+                    .titleMedium
                     ?.copyWith(fontWeight: FontWeight.w500),
           ),
           TextButton(
@@ -477,7 +477,7 @@ class Title extends StatelessWidget {
               style: textStyle ??
                   Theme.of(context)
                       .textTheme
-                      .subtitle2
+                      .titleMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
             ),
           ),
@@ -523,7 +523,7 @@ class _ItemView extends StatelessWidget {
                   TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w300,
-                    color: Theme.of(context).textTheme.bodyText1?.color,
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
                   ),
         ),
       ),
